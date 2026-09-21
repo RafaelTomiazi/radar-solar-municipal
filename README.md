@@ -5,6 +5,8 @@ Painel de acompanhamento da geração distribuída de energia no Brasil por muni
 **Projeto de Bloco: Inteligência Artificial Aplicada**, Instituto Infnet
 Aluno: Rafael Celestino Tomiazi
 
+**App publicado:** https://radar-solar-municipal-h3abtstmymwssr8a9wpb9m.streamlit.app/
+
 ## O problema
 
 A ANEEL publica a lista completa dos empreendimentos de micro e minigeração distribuída do país, mas o arquivo tem 101 MB, 4,67 milhões de linhas e 31 colunas técnicas. O dado é aberto e mesmo assim inacessível para quem não processa dados.
@@ -86,7 +88,7 @@ A coleta baixa uns 101 MB da ANEEL e levou por volta de 40 segundos aqui. O proc
 
 ## Deploy
 
-O app está pronto para o Streamlit Community Cloud: o repositório é público, as dependências estão no `requirements.txt` e os dados que o app usa (`data/processed`, `data/external` e `Sample_Data`) estão versionados. Para publicar, basta entrar em share.streamlit.io com a conta do GitHub, escolher este repositório, a branch `main` e o arquivo `app.py`.
+O app está publicado no Streamlit Community Cloud em https://radar-solar-municipal-h3abtstmymwssr8a9wpb9m.streamlit.app/. Ele foi preparado assim: o repositório é público, as dependências estão no `requirements.txt` e os dados que o app usa (`data/processed`, `data/external` e `Sample_Data`) estão versionados. Para publicar, basta entrar em share.streamlit.io com a conta do GitHub, escolher este repositório, a branch `main` e o arquivo `app.py`.
 
 ## Fontes de dados
 
