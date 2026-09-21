@@ -2,10 +2,23 @@
 
 Painel de acompanhamento da geração distribuída de energia no Brasil por município.
 
-**Projeto de Bloco: Inteligência Artificial Aplicada**, Instituto Infnet
+**Projeto de Bloco: Inteligência Artificial Aplicada**, Instituto Infnet  
 Aluno: Rafael Celestino Tomiazi
 
 **App publicado:** https://radar-solar-municipal-h3abtstmymwssr8a9wpb9m.streamlit.app/
+
+## Entregas
+
+| Etapa | O que foi entregue | Onde ver |
+|---|---|---|
+| TP1 | Proposta, Project Charter, Data Summary Report, coleta ANEEL/IBGE, processamento e app demo | tag [`tp1`](https://github.com/RafaelTomiazi/radar-solar-municipal/tree/tp1) |
+| TP2 | Git e deploy, interface interativa, scraping com Beautiful Soup, nuvem de palavras e estatísticas, cache e estado de sessão, upload/download de CSV, documentos atualizados | branch `main` e [histórico de commits](https://github.com/RafaelTomiazi/radar-solar-municipal/commits/main) |
+
+### Correções feitas a partir do retorno do TP1
+
+- `requirements.txt` com faixas de versão (`>=`) no lugar de versões fixas (`==`), como recomendado na correção.
+- Instalação testada do zero em um ambiente virtual limpo (`pip install -r requirements.txt` e `pip check` sem conflitos) antes da entrega.
+- Troca do parâmetro `use_container_width`, que foi descontinuado no Streamlit, por `width`.
 
 ## O problema
 
@@ -27,7 +40,8 @@ A organização segue as fases do ciclo de vida do TDSP.
 │   └── App/                 módulos do dashboard (texto/nuvem de palavras e upload)
 ├── Docs/
 │   ├── Project/             Project Charter
-│   └── DataReport/          Data Summary Report
+│   ├── DataReport/          Data Summary Report
+│   └── Prints/              prints da aplicação
 ├── Sample_Data/             amostras versionadas e exemplo de CSV para upload
 ├── data/
 │   ├── raw/                 dado bruto, fora do versionamento
@@ -39,6 +53,15 @@ A organização segue as fases do ciclo de vida do TDSP.
 O `data/raw/` está no `.gitignore` porque o Parquet da ANEEL tem 101 MB e o GitHub não aceita arquivo acima de 100 MB. Descobri isso tentando dar push. Ele é reconstruído pelo script de coleta.
 
 ## Como rodar
+
+A forma mais rápida de ver o projeto é o app publicado (link no topo). Para rodar localmente:
+
+Clonar o repositório:
+
+```bash
+git clone https://github.com/RafaelTomiazi/radar-solar-municipal.git
+cd radar-solar-municipal
+```
 
 Criar e ativar o ambiente virtual:
 
@@ -60,7 +83,9 @@ Rodar a aplicação:
 streamlit run app.py
 ```
 
-A demo já funciona com as amostras versionadas em `Sample_Data/`. Para o painel com a base completa, rodar antes:
+O app abre direto, sem rodar nenhum script antes: os dados processados (`data/processed`), as notícias extraídas (`data/external`) e as amostras (`Sample_Data`) já estão no repositório. Se `data/processed` não existir, o app cai para as amostras de `Sample_Data/` e avisa na tela.
+
+Para refazer a base completa a partir da ANEEL e do IBGE:
 
 ```bash
 python Code/DataAcquisition/coleta_dados.py
@@ -86,18 +111,29 @@ A coleta baixa uns 101 MB da ANEEL e levou por volta de 40 segundos aqui. O proc
 - **Seus dados:** upload de CSV com o código IBGE do município. As colunas enviadas entram no painel como novos indicadores (por exemplo, kW por mil habitantes) e a base combinada pode ser baixada. Tem um modelo e um exemplo pronto com a população do IBGE para testar.
 - **Cache e estado de sessão:** as cargas de CSV, a consulta à API da ANEEL e a nuvem de palavras usam `st.cache_data`. Filtros, município consultado, histórico de consultas e o arquivo enviado ficam no `st.session_state` e continuam valendo ao trocar de aba.
 
+### Roteiro rápido para testar as funcionalidades do TP2
+
+1. **Filtros e estado de sessão:** escolha uma região na barra lateral e troque de aba. O filtro continua valendo.
+2. **Municípios:** busque um município, mude o ranking (indicador, maiores/menores, quantidade), baixe o CSV e compare municípios. O histórico aparece na barra lateral.
+3. **Notícias ANEEL:** veja a nuvem de palavras e as estatísticas, e filtre por categoria, período ou busca no texto (por exemplo, "tarifa").
+4. **Upload:** na aba Seus dados, clique em "Baixar exemplo pronto: população 2026 (IBGE)" e envie esse mesmo arquivo. Depois, na aba Panorama, escolha o indicador "kW por mil de 'populacao'".
+
+Os prints dessas telas estão em [`Docs/Prints/`](Docs/Prints).
+
 ## Deploy
 
 O app está publicado no Streamlit Community Cloud em https://radar-solar-municipal-h3abtstmymwssr8a9wpb9m.streamlit.app/. Ele foi preparado assim: o repositório é público, as dependências estão no `requirements.txt` e os dados que o app usa (`data/processed`, `data/external` e `Sample_Data`) estão versionados. Para publicar, basta entrar em share.streamlit.io com a conta do GitHub, escolher este repositório, a branch `main` e o arquivo `app.py`.
 
 ## Fontes de dados
 
-Geração distribuída: ANEEL, Portal de Dados Abertos, licença ODbL, referência de 21/08/2026.
-Malha municipal: IBGE, API de Localidades.
-População estimada: IBGE, API SIDRA (tabela 6579).
-Notícias: site da ANEEL, gov.br/aneel/pt-br/assuntos/noticias.
+- Geração distribuída: ANEEL, Portal de Dados Abertos, licença ODbL, referência de 21/08/2026.
+- Malha municipal: IBGE, API de Localidades.
+- População estimada: IBGE, API SIDRA (tabela 6579).
+- Notícias: site da ANEEL, gov.br/aneel/pt-br/assuntos/noticias.
 
 ## Documentos
 
 - [Project Charter](Docs/Project/project_charter.md)
 - [Data Summary Report](Docs/DataReport/data_summary_report.md)
+- [Prints da aplicação](Docs/Prints)
+- PDFs entregues: [TP1](rafael_tomiazi_PB_TP1.pdf) e [TP2](rafael_tomiazi_PB_TP2.pdf)
