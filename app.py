@@ -172,7 +172,7 @@ with aba_municipio:
     )
     st.dataframe(
         municipios.sort_values(col_pot, ascending=False).head(50),
-        use_container_width=True,
+        width='stretch',
         hide_index=True,
     )
 
@@ -184,13 +184,13 @@ with aba_bruto:
     )
     dados2 = carregar("amostra_gd_bruto.csv", PASTA_AMOSTRA)
     if dados2 is not None:
-        st.dataframe(dados2.head(50), use_container_width=True, hide_index=True)
+        st.dataframe(dados2.head(50), width='stretch', hide_index=True)
     else:
         st.warning("Amostra do dado bruto não encontrada em Sample_Data.")
 
 with aba_fonte:
     if por_fonte is not None:
-        st.dataframe(por_fonte, use_container_width=True, hide_index=True)
+        st.dataframe(por_fonte, width='stretch', hide_index=True)
         st.bar_chart(por_fonte.set_index("DscFonteGeracao")["potencia_total_kw"].head(6))
     else:
         st.warning("Arquivo de fontes não encontrado.")
