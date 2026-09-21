@@ -1,0 +1,204 @@
+SigUF,DscClasseConsumo,qtd_empreendimentos,potencia_total_kw
+SP,Residencial,662334,4358875.05
+MG,Comercial,47433,2609028.13
+SP,Comercial,78798,2188463.3
+MG,Residencial,330410,2021736.15
+RS,Residencial,326987,1992604.83
+BA,Residencial,260453,1691522.52
+PR,Residencial,232252,1588340.81
+MT,Residencial,196658,1522667.99
+GO,Residencial,151852,1252466.2
+MA,Residencial,140283,1247354.02
+RJ,Residencial,181093,1245848.24
+PA,Residencial,143234,1219509.22
+SC,Residencial,147915,1126299.48
+MG,Rural,62940,1119372.1
+PR,Rural,50144,1048997.27
+PE,Residencial,149469,1022277.4
+PR,Comercial,35133,997863.2
+MS,Residencial,144686,934979.12
+CE,Residencial,122936,930155.56
+RS,Comercial,32053,875833.31
+BA,Comercial,39385,863160.6
+GO,Comercial,15880,756959.02
+RS,Rural,60978,720137.35
+RN,Residencial,107007,690611.74
+PR,Industrial,11564,667440.8
+RJ,Comercial,12720,609509.95
+SP,Rural,29987,585476.72
+PI,Residencial,77865,577334.73
+MT,Industrial,4865,565350.74
+CE,Comercial,13839,556960.74
+MT,Comercial,15885,547523.62
+ES,Residencial,67885,524985.32
+SC,Comercial,15539,515040.44
+MT,Rural,21293,514891.92
+RO,Residencial,50021,472039.63
+TO,Residencial,57221,447694.31
+MA,Comercial,8481,410064.9
+ES,Rural,27443,405346.66
+AL,Residencial,49075,366626.09
+MS,Industrial,2523,348978.4
+SP,Industrial,8393,343191.54
+SC,Rural,24243,340296.49
+GO,Rural,17253,332844.38
+ES,Comercial,9318,332759.4
+PB,Residencial,44769,329339.38
+MS,Comercial,12745,327570.57
+SC,Industrial,10946,323285.43
+PA,Comercial,10960,316090.21
+PE,Comercial,13997,315698.18
+MG,Industrial,4858,278296.47
+DF,Residencial,31631,274797.84
+RN,Comercial,12368,265692.33
+MS,Rural,14730,246169.07
+BA,Rural,15628,245850.19
+RS,Industrial,5408,245631.24
+DF,Comercial,2799,232808.45
+PB,Comercial,8124,224708.63
+PI,Comercial,7559,208954.83
+TO,Comercial,5126,206969.62
+AL,Comercial,5801,186579.22
+AP,Residencial,16827,169460.14
+AM,Residencial,14930,165739.19
+CE,Industrial,1198,157924.12
+SE,Residencial,20035,153148.06
+RO,Comercial,4658,148262.66
+AM,Comercial,2794,142616.36
+CE,Rural,13808,140396.92
+AC,Residencial,16597,140091.42
+PE,Industrial,900,125089.46
+RO,Rural,11502,124341.24
+SE,Comercial,4711,118495.11
+PE,Rural,7654,96494.09
+MA,Rural,4189,92742.27
+BA,Industrial,1813,85524.66
+RR,Residencial,7660,76361.37
+MA,REBR,10849,73292.22
+SP,Poder Público,1815,70147.63
+GO,Industrial,991,66940.15
+AL,Industrial,383,66295.0
+PR,Poder Público,1062,64021.17
+PA,Rural,3877,63030.64
+PB,Industrial,989,60201.67
+DF,Rural,1360,59649.56
+ES,Industrial,1706,59310.19
+RN,Rural,3898,58133.49
+RJ,Industrial,750,54121.59
+AC,Comercial,1720,50990.95
+MG,Poder Público,1420,50754.76
+BA,REBR,9397,48573.21
+PB,Rural,3181,45560.75
+RJ,Rural,3903,45550.97
+TO,Rural,2755,43414.19
+PA,Industrial,434,40789.16
+BA,Poder Público,744,38108.17
+AP,Comercial,1123,37927.69
+PI,Rural,2737,37414.74
+MA,Industrial,569,35785.66
+CE,Poder Público,925,35369.98
+RS,Poder Público,971,33019.02
+MS,Poder Público,449,32287.95
+RN,Industrial,349,31461.37
+MA,Poder Público,633,30944.06
+RR,Comercial,926,30836.3
+MT,Poder Público,414,30430.11
+PA,REBR,3986,27268.57
+ES,Poder Público,449,27255.78
+TO,Poder Público,543,27126.04
+SP,Serviço Público,72,26543.9
+RO,Industrial,258,24212.97
+AL,Rural,1382,23641.92
+GO,Poder Público,689,21493.71
+PI,Industrial,333,20235.63
+PB,Poder Público,424,18946.2
+ES,REBR,2801,18405.88
+RN,Poder Público,461,18161.87
+TO,Industrial,260,17808.44
+SP,REBR,3030,16555.3
+PI,Poder Público,399,15929.9
+SE,Rural,1177,15758.57
+RO,Poder Público,326,15130.53
+SC,Poder Público,198,14239.75
+SE,Industrial,253,13312.24
+PI,REBR,1654,11840.06
+RJ,Poder Público,355,11639.63
+AM,Industrial,135,11345.55
+AP,REBR,1379,11343.91
+DF,Poder Público,80,10252.89
+MG,REBR,1949,9662.85
+PA,Poder Público,331,9614.16
+AC,Rural,920,9437.53
+RR,Poder Público,138,9234.92
+PE,Poder Público,100,8023.67
+RS,REBR,1377,7262.92
+AL,REBR,1057,5842.68
+PR,REBR,1031,5766.18
+SE,Serviço Público,2,5295.0
+AL,Poder Público,143,5261.49
+SE,Poder Público,71,4695.64
+PR,Serviço Público,42,4651.47
+AM,Rural,160,4001.62
+SE,REBR,617,3666.45
+AC,Poder Público,32,3492.85
+AC,Industrial,48,3382.62
+ES,Serviço Público,11,3346.4
+AM,Poder Público,50,3342.09
+CE,Serviço Público,13,3318.75
+DF,Industrial,59,3313.64
+SC,REBR,556,3216.85
+TO,Serviço Público,5,3028.0
+AP,Industrial,38,3018.11
+MS,Serviço Público,19,2883.88
+SC,Serviço Público,68,2871.12
+SP,Iluminação pública,16,2858.98
+MS,Iluminação pública,12,2780.71
+RR,Industrial,36,2720.0
+AP,Poder Público,34,2705.45
+RR,Rural,137,2142.97
+PR,Consumo Próprio,3,2125.0
+MT,Serviço Público,29,2090.7799999999997
+RJ,REBR,262,1630.74
+MG,Serviço Público,49,1586.3
+BA,Iluminação pública,97,1538.6
+PR,Iluminação pública,26,1507.7
+MA,Serviço Público,12,1400.7
+PI,Serviço Público,14,980.32
+GO,Serviço Público,19,967.01
+RS,Serviço Público,15,896.1400000000001
+PE,Serviço Público,6,890.66
+AP,Rural,54,815.55
+BA,Serviço Público,35,791.76
+MG,Iluminação pública,17,732.1
+MT,Iluminação pública,9,426.4
+PB,Serviço Público,6,405.0
+RJ,Serviço Público,7,357.45
+TO,Iluminação pública,9,336.5
+PI,Iluminação pública,7,320.0
+RS,Iluminação pública,6,281.01
+SP,Consumo Próprio,18,273.67
+AL,Serviço Público,4,253.0
+RN,Serviço Público,3,187.04
+CE,Iluminação pública,6,142.0
+SE,Iluminação pública,3,141.0
+PA,Serviço Público,5,134.13
+AM,Serviço Público,2,120.0
+SC,Iluminação pública,2,100.0
+MA,Iluminação pública,4,92.5
+RN,Iluminação pública,10,79.15
+RS,Consumo Próprio,2,74.07
+RJ,Iluminação pública,4,73.31
+AP,Serviço Público,1,60.0
+PA,Iluminação pública,2,60.0
+GO,Iluminação pública,3,54.0
+AC,Serviço Público,2,42.0
+ES,Iluminação pública,3,30.0
+PB,Iluminação pública,1,25.0
+RJ,Consumo Próprio,4,24.009999999999998
+SC,REBR ,1,15.0
+AL,Iluminação pública,1,15.0
+MA,Consumo Próprio,3,15.0
+RO,Iluminação pública,1,10.0
+PE,Iluminação pública,1,9.95
+DF,Serviço Público,1,4.0
+SE,Consumo Próprio,1,3.74

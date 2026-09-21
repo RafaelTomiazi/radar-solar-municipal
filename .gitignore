@@ -1,0 +1,9 @@
+# o parquet da ANEEL tem 101 MB e estoura o limite de 100 MB por arquivo do
+# GitHub. ele e reconstruido pelo script de coleta
+data/raw/
+.venv/
+venv/
+__pycache__/
+*.pyc
+.streamlit/secrets.toml
+.env
