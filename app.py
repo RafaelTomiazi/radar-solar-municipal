@@ -259,12 +259,12 @@ with aba_panorama:
         concentracao = top10 / total_kw * 100 if total_kw else 0
 
         m1, m2, m3, m4 = st.columns(4)
-        m1.metric("Potência instalada", "%.2f GW" % (total_kw / 1e6))
+        m1.metric("Potência instalada", ("%.2f GW" % (total_kw / 1e6)).replace(".", ","))
         m2.metric("Empreendimentos", "{:,}".format(int(filtrada["qtd_empreendimentos"].sum())).replace(",", "."))
         m3.metric("Municípios com adoção", "%d de %d" % (com_registro, len(filtrada)))
         m4.metric(
             "Potência nos 10% maiores",
-            "%.1f%%" % concentracao,
+            ("%.1f%%" % concentracao).replace(".", ","),
             help="Participação dos 10% de municípios com mais potência no total do recorte.",
         )
 
@@ -347,8 +347,8 @@ with aba_municipios:
         c1, c2, c3, c4 = st.columns(4)
         c1.metric(
             "Potência instalada",
-            "%.2f MW" % (linha["potencia_total_kw"] / 1000),
-            delta="%.1f MW vs mediana da UF" % ((linha["potencia_total_kw"] - mediana_uf) / 1000),
+            ("%.2f MW" % (linha["potencia_total_kw"] / 1000)).replace(".", ","),
+            delta=("%.1f MW vs mediana da UF" % ((linha["potencia_total_kw"] - mediana_uf) / 1000)).replace(".", ","),
         )
         c2.metric("Empreendimentos", "{:,}".format(int(linha["qtd_empreendimentos"])).replace(",", "."))
         c3.metric("Posição na UF", "%dº de %d" % (pos_uf, len(mesma_uf)))
