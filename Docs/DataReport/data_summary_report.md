@@ -2,9 +2,9 @@
 
 **Projeto:** Radar Solar Municipal
 **Autor:** Rafael Celestino Tomiazi
-**Data:** 24 de agosto de 2026 (TP1), atualizado em 21 de setembro de 2026 (TP2)
+**Data:** 24 de agosto de 2026 (TP1), atualizado em 21 de setembro de 2026 (TP2) e em 19 de outubro de 2026 (TP3)
 
-O Data Summary Report é o documento da fase de Data Acquisition & Understanding do TDSP. A primeira versão, do TP1, cobria a base da ANEEL e a malha do IBGE. Nesta versão do TP2 entraram três fontes novas: as notícias do site da ANEEL, extraídas com Beautiful Soup, a estimativa de população do IBGE e os arquivos que o próprio usuário envia pelo painel. Documentei só as colunas que eu uso de fato, não as 31 do arquivo original da ANEEL.
+O Data Summary Report é o documento da fase de Data Acquisition & Understanding do TDSP. A primeira versão, do TP1, cobria a base da ANEEL e a malha do IBGE. No TP2 entraram as notícias do site da ANEEL, extraídas com Beautiful Soup, a estimativa de população do IBGE e os arquivos que o próprio usuário envia pelo painel. No TP3 entrou a geração por fonte do ONS, extraída com Selenium de uma página dinâmica, e a API do próprio projeto, que passou a ser uma forma de acessar os dados. Documentei só as colunas que eu uso de fato, não as 31 do arquivo original da ANEEL.
 
 ## 1. Fontes de dados
 
@@ -32,6 +32,20 @@ A coleta de 21/09/2026 trouxe 83 notícias, publicadas entre 15/03/2022 e 18/09/
 
 Acesso pela API SIDRA em `https://apisidra.ibge.gov.br/values/t/6579/n6/all/v/9324/p/last`, JSON, sem chave. Tabela 6579, variável 9324 (população residente estimada), todos os municípios, último ano disponível. Traz os 5.571 municípios com a estimativa de 2026, que soma 214,2 milhões de habitantes. O script é o `Code/DataAcquisition/coleta_populacao.py`.
 
+### ONS, geração por fonte em tempo real (novo no TP3)
+
+Extração com Selenium em `https://www.ons.org.br/paginas/energia-agora/carga-e-geracao`, página pública, sem chave. O script é o `Code/DataAcquisition/scraping_ons_selenium.py`.
+
+Essa é a fonte que justifica o Selenium. Testei primeiro com requests e Beautiful Soup: a página devolve 154 KB de HTML, mas os valores de geração não estão nele, porque o JavaScript da página busca os números e monta o quadro depois que ela abre. O Selenium abre a página num Chrome sem janela, espera aparecer algum valor em MW (checa de 2 em 2 segundos, até 20 segundos) e lê o texto da tela. Os valores vêm em formato brasileiro (63.554,2 MW) e são convertidos para número.
+
+O quadro traz a geração do Sistema Interligado Nacional separada em hidráulica, térmica, nuclear, eólica, solar, MMGD (micro e minigeração distribuída) e importação. A MMGD é o mesmo tipo de empreendimento que a base da ANEEL lista por município, então essa fonte liga o que está instalado com o que está gerando.
+
+A coleta de 19/10/2026 às 18h17 trouxe 90,6 GW de geração total, 83,5% renovável, com a MMGD gerando 195,3 MW e a solar centralizada 59,0 MW.
+
+### API do Radar Solar (novo no TP3)
+
+Não é uma fonte externa, é a forma nova de acessar os dados processados. A API em `Code/API/api.py` lê o `data/processed/cobertura_municipios.csv` quando sobe e serve esses dados por HTTP. A página Consulta via API do app usa essa API em vez de ler o CSV. No TP4 ela vai ser o caminho pelo qual a LLM consulta números exatos.
+
 ### Dados enviados pelo usuário (novo no TP2)
 
 Pela aba Seus dados o usuário envia um CSV com o código IBGE do município e uma ou mais colunas numéricas, como população, número de escolas ou orçamento de um programa. O arquivo não é gravado no servidor: ele fica só na sessão do usuário, é validado e combinado com a base da ANEEL pelo código IBGE.
@@ -46,6 +60,8 @@ Pela aba Seus dados o usuário envia um CSV com o código IBGE do município e u
 | ANEEL, notícias | Dar o contexto regulatório: o que a agência está discutindo (tarifas, leilões, consultas públicas, regras de GD) e como isso muda com o tempo | Notícias ANEEL |
 | IBGE, população | Transformar potência absoluta em indicador relativo (kW por mil habitantes), que compara municípios de tamanhos diferentes | Exemplo pronto de upload |
 | Arquivo do usuário | Deixar o gestor cruzar o dado da ANEEL com a informação que ele já tem sobre o município | Seus dados, Panorama e Municípios |
+| ONS, geração por fonte | Mostrar quanto a MMGD e a solar estão gerando no país e comparar com a potência instalada da ANEEL | Geração agora (ONS) |
+| API do Radar Solar | Servir os indicadores municipais por HTTP para o app e, no TP4, para a LLM | Consulta via API |
 
 ## 2. Dicionário de dados
 
@@ -95,6 +111,18 @@ Colunas do exemplo de população (`Sample_Data/exemplo_upload_populacao.csv`):
 | `populacao` | int64 | Divisor do indicador kW por mil habitantes |
 | `ano` | int64 | Ano da estimativa. Como é igual em todas as linhas, o painel não transforma essa coluna em indicador |
 
+Colunas da geração do ONS (`data/external/geracao_ons.csv`, TP3):
+
+| Coluna | Tipo | Para que uso |
+|---|---|---|
+| `fonte` | string | Nome da fonte (Hidráulica, Térmica, Nuclear, Eólica, Solar, MMGD, Importação) |
+| `geracao_mw` | float | Geração da fonte no momento da coleta, em MW |
+| `participacao_pct` | float | Participação da fonte na geração total, calculada no script |
+| `atualizacao_ons` | string | Data e hora que o ONS informa na página, para saber de quando é o número |
+| `coletado_em` | string | Data e hora em que o script rodou |
+
+Campos devolvidos pela API (TP3): as rotas de consulta devolvem as colunas de `cobertura_municipios.csv` (`CodMunicipioIbge`, `municipio`, `uf`, `NomRegiao`, `qtd_empreendimentos`, `potencia_total_kw`, `potencia_media_kw`). A rota POST recebe `cod_ibge` (int, 7 dígitos) e `populacao` (int maior que zero) e devolve `kw_por_mil_habitantes` (float). Os tipos são validados pela própria FastAPI: um valor fora do esperado devolve erro 422 com a explicação.
+
 Regras do arquivo enviado pelo usuário: a coluna do código IBGE pode se chamar `CodMunicipioIbge`, `cod_ibge`, `codigo_ibge`, `cod_municipio`, `ibge` ou `codigo`. O separador pode ser vírgula ou ponto e vírgula, e a codificação UTF-8 ou Latin-1, porque é assim que o Excel em português salva CSV. Números no formato brasileiro (1.234,5) são convertidos. Linhas com código inválido ou repetido são descartadas, com aviso na tela.
 
 ## 3. Colunas descartadas por privacidade
@@ -115,6 +143,8 @@ Nas notícias, a categoria mais frequente é Tarifas (18 notícias), seguida de 
 
 Com a população, o Brasil tem 241 kW de geração distribuída por mil habitantes. Entre os estados a diferença é grande: Mato Grosso tem 806 kW por mil habitantes e o Amazonas tem 75, mais de dez vezes menos. No ranking por habitante aparecem no topo municípios pequenos com usinas de minigeração, como Santa Clara d'Oeste (SP), com 2.710 habitantes. Esse indicador relativo complementa o absoluto, que favorece as capitais.
 
+No ONS, a coleta das 18h17 de 19/10/2026 mostra a hidráulica com 70,1% da geração, a térmica com 15,0% e a eólica com 13,1%. A MMGD aparecia com 0,22% e a solar centralizada com 0,07%. Os números baixos de solar vêm da hora: era fim de tarde. Comparando com a base da ANEEL, a MMGD gerava naquele momento perto de 0,4% da potência instalada de GD. Para tirar conclusão sobre a contribuição real da GD é preciso coletar em vários horários, o que fica planejado para o TP4.
+
 ## 5. Qualidade e limitações
 
 As colunas `CodSubGrupoTarifario` e `SigModalidadeEmpreendimento` vêm todas nulas no arquivo, então não dá para usar.
@@ -131,6 +161,10 @@ A estimativa de população do IBGE é uma projeção, não um censo. Para compa
 
 O arquivo enviado pelo usuário não passa por checagem de conteúdo além do formato. Se ele subir um número errado, o painel calcula o indicador com esse número.
 
+A coleta do ONS é uma fotografia de um instante, não uma série. O script lê o texto da página procurando cada fonte seguida de um valor em MW, então se o ONS mudar o texto do quadro o script para de achar os números e para com erro.
+
+Os 4 municípios do Amazonas sem nenhum empreendimento vêm com região e potência média vazias no processado. No app isso não atrapalha, mas na API valor vazio não vira JSON e a rota devolvia erro 500. Na carga da API eu preencho a região pela UF e a média com zero.
+
 ## 6. Arquivos gerados
 
 | Arquivo | Conteúdo | Tamanho |
@@ -144,3 +178,5 @@ O arquivo enviado pelo usuário não passa por checagem de conteúdo além do fo
 | `data/external/noticias_aneel.csv` | 83 notícias da ANEEL com texto completo (TP2) | 178 KB |
 | `data/external/noticias_aneel.txt` | Texto das notícias, uma por linha, para a nuvem de palavras (TP2) | 161 KB |
 | `Sample_Data/exemplo_upload_populacao.csv` | População 2026 dos 5.571 municípios, exemplo de upload (TP2) | 106 KB |
+| `data/external/geracao_ons.csv` | Geração do SIN por fonte, coletada com Selenium (TP3) | menos de 1 KB |
+| `data/external/geracao_ons.txt` | Mesma geração em texto, uma fonte por linha (TP3) | menos de 1 KB |

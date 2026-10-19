@@ -1,0 +1,10 @@
+Geracao por fonte no SIN - ONS (coletado via Selenium)
+Atualizacao do ONS: 19/10/2026 18:17
+
+Hidráulica: 63554.2 MW (70.12%)
+Térmica: 13562.8 MW (14.96%)
+Nuclear: 1354.2 MW (1.49%)
+Eólica: 11905.9 MW (13.14%)
+Solar: 59.0 MW (0.07%)
+MMGD: 195.3 MW (0.22%)
+Importação: 3.0 MW (0.00%)
