@@ -1,0 +1,392 @@
+[
+  {
+    "teste": "status antes de carregar",
+    "metodo": "GET",
+    "rota": "/llm/status",
+    "corpo": null,
+    "codigo_esperado": 200,
+    "codigo_recebido": 200,
+    "passou": true,
+    "segundos": 4.64,
+    "resposta": {
+      "modelo": "Qwen/Qwen2.5-0.5B-Instruct",
+      "carregado": false,
+      "bibliotecas_instaladas": true,
+      "erro_carga": null,
+      "tempo_limite_s": 180
+    }
+  },
+  {
+    "teste": "carregar o modelo",
+    "metodo": "POST",
+    "rota": "/llm/carregar",
+    "corpo": null,
+    "codigo_esperado": 200,
+    "codigo_recebido": 200,
+    "passou": true,
+    "segundos": 6.71,
+    "resposta": {
+      "modelo": "Qwen/Qwen2.5-0.5B-Instruct",
+      "carregado": true,
+      "bibliotecas_instaladas": true,
+      "erro_carga": null,
+      "tempo_limite_s": 180
+    }
+  },
+  {
+    "teste": "resumo de notícia (GD)",
+    "metodo": "POST",
+    "rota": "/processar_texto",
+    "corpo": {
+      "texto": "O crescimento da oferta de energia elétrica no Brasil em agosto foi de 1.968,37 megawatts (MW). Segundo dados reunidos pela Agência Nacional de Energia Elétrica (ANEEL), entre as 20 novas usinas que entraram em operação comercial no mês, estão três termelétricas (100,87 MW), 15 centrais solares fotovoltaicas (891,00 MW) e duas usinas eólicas (76,50 MW). Ao longo do ano, até 31 de agosto, a expansão na matriz elétrica foi de 4.852,78 MW. Entre as 91 usinas que começaram a operar no período, estão 75 centrais solares fotovoltaicas (3.520,93 MW), seis usinas termelétricas (1.087,05 MW), três usinas eólicas (184,50 MW), cinco pequenas centrais hidrelétricas (52,70 MW) e duas centrais geradoras hidrelétricas (7,60 MW). De janeiro a agosto, usinas em 15 estados entraram em operação comercial. Os destaques, em ordem decrescente, foram o Mato Grosso do Sul (894,20 MW), o Pará (649,37 MW) e o Rio Grande do Norte (639,57 MW). O Mato Grosso do Sul também foi o estado com maior expansão em agosto, com 891,00 MW. O Pará ficou em segundo lugar no mês, com 629,37 MW. . Capacidade total de usinas centralizadas é de 220,7 GW Em 8 de setembro, o Brasil somou 220.662,7 MW de potência fiscalizada, de acordo com dados do Sistema de Informações de Geração da ANEEL, o SIGA , atualizado diariamente com dados de usinas em operação e de empreendimentos outorgados em fase de construção. Desse total em operação, ainda de acordo com o SIGA, 84,67% da potência instalada é de fonte renovável. Onde encontrar mais dados sobre a geração elétrica Uma abordagem mais detalhada do crescimento da oferta centralizada de energia elétrica pode ser encontrada no painel RALIE , que reúne informações sobre a expansão da matriz elétrica. Com formato intuitivo, a ferramenta amplia o acesso aos dados de fiscalização de novas usinas em implantação e facilita o acompanhamento da expansão da oferta de geração de acordo com o ano, região, tipo de fonte de energia, entre outros filtros. Os objetivos são aprimorar a interatividade e fornecer mais informações sobre obras de geração. As informações do painel são atualizadas mensalmente baseadas nas inspeções in loco nas obras das centrais geradoras e nos dados disponibilizados no Relatório de Acompanhamento de Empreendimentos de Geração de Energia Elétrica (Rapeel), que conta com a contribuição das empresas fiscalizadas para uma análise minuciosa da equipe de monitoramento. Veja neste link os relatórios e indicadores da ANEEL relacionados à geração de energia elétrica.",
+      "tipo": "resumo"
+    },
+    "codigo_esperado": 200,
+    "codigo_recebido": 200,
+    "passou": true,
+    "segundos": 22.47,
+    "resposta": {
+      "tipo_analise": "resumo",
+      "texto_original": "O crescimento da oferta de energia elétrica no Brasil em agosto foi de 1.968,37 megawatts (MW). Segundo dados reunidos pela Agência Nacional de Energia Elétrica (ANEEL), entre as 20 novas usinas que entraram em operação comercial no mês, estão três termelétricas (100,87 MW), 15 centrais solares fotovoltaicas (891,00 MW) e duas usinas eólicas (76,50 MW). Ao longo do ano, até 31 de agosto, a expansão na matriz elétrica foi de 4.852,78 MW. Entre as 91 usinas que começaram a operar no período, estão 75 centrais solares fotovoltaicas (3.520,93 MW), seis usinas termelétricas (1.087,05 MW), três usinas eólicas (184,50 MW), cinco pequenas centrais hidrelétricas (52,70 MW) e duas centrais geradoras hidrelétricas (7,60 MW). De janeiro a agosto, usinas em 15 estados entraram em operação comercial. Os destaques, em ordem decrescente, foram o Mato Grosso do Sul (894,20 MW), o Pará (649,37 MW) e o Rio Grande do Norte (639,57 MW). O Mato Grosso do Sul também foi o estado com maior expansão em agosto, com 891,00 MW. O Pará ficou em segundo lugar no mês, com 629,37 MW. . Capacidade total de usinas centralizadas é de 220,7 GW Em 8 de setembro, o Brasil somou 220.662,7 MW de potência fiscalizada, de acordo com dados do Sistema de Informações de Geração da ANEEL, o SIGA , atualizado diariamente com dados de usinas em operação e de empreendimentos outorgados em fase de construção. Desse total em operação, ainda de acordo com o SIGA, 84,67% da potência instalada é de fonte renovável. Onde encontrar mais dados sobre a geração elétrica Uma abordagem mais detalhada do crescimento da oferta centralizada de energia elétrica pode ser encontrada no painel RALIE , que reúne informações sobre a expansão da matriz elétrica. Com formato intuitivo, a ferramenta amplia o acesso aos dados de fiscalização de novas usinas em implantação e facilita o acompanhamento da expansão da oferta de geração de acordo com o ano, região, tipo de fonte de energia, entre outros filtros. Os objetivos são aprimorar a interatividade e fornecer mais informações sobre obras de geração. As informações do painel são atualizadas mensalmente baseadas nas inspeções in loco nas obras das centrais geradoras e nos dados disponibilizados no Relatório de Acompanhamento de Empreendimentos de Geração de Energia Elétrica (Rapeel), que conta com a contribuição das empresas fiscalizadas para uma análise minuciosa da equipe de monitoramento. Veja neste link os relatórios e indicadores da ANEEL relacionados à geração de energia elétrica.",
+      "tamanho_texto": 2508,
+      "resultado": "A oferta de energia elétrica no Brasil cresceu de 1.968,37 MW em agosto para 4.852,78 MW em agosto, com 15 centrais solares fotovoltaicas e 76,50 MW de usinas eólicas. A expansão na matriz elétrica foi de 4.852,78 MW até 31 de agosto.",
+      "classe": null,
+      "numeros_fora_dos_dados": [],
+      "modelo": "Qwen/Qwen2.5-0.5B-Instruct",
+      "tempo_segundos": 22.46,
+      "em_cache": false,
+      "gerado_por_ia": true,
+      "aviso": "Texto gerado por IA (modelo local Qwen/Qwen2.5-0.5B-Instruct). Pode conter erros: confira sempre com os números originais que vão junto nesta resposta."
+    }
+  },
+  {
+    "teste": "mesmo resumo de novo (cache)",
+    "metodo": "POST",
+    "rota": "/processar_texto",
+    "corpo": {
+      "texto": "O crescimento da oferta de energia elétrica no Brasil em agosto foi de 1.968,37 megawatts (MW). Segundo dados reunidos pela Agência Nacional de Energia Elétrica (ANEEL), entre as 20 novas usinas que entraram em operação comercial no mês, estão três termelétricas (100,87 MW), 15 centrais solares fotovoltaicas (891,00 MW) e duas usinas eólicas (76,50 MW). Ao longo do ano, até 31 de agosto, a expansão na matriz elétrica foi de 4.852,78 MW. Entre as 91 usinas que começaram a operar no período, estão 75 centrais solares fotovoltaicas (3.520,93 MW), seis usinas termelétricas (1.087,05 MW), três usinas eólicas (184,50 MW), cinco pequenas centrais hidrelétricas (52,70 MW) e duas centrais geradoras hidrelétricas (7,60 MW). De janeiro a agosto, usinas em 15 estados entraram em operação comercial. Os destaques, em ordem decrescente, foram o Mato Grosso do Sul (894,20 MW), o Pará (649,37 MW) e o Rio Grande do Norte (639,57 MW). O Mato Grosso do Sul também foi o estado com maior expansão em agosto, com 891,00 MW. O Pará ficou em segundo lugar no mês, com 629,37 MW. . Capacidade total de usinas centralizadas é de 220,7 GW Em 8 de setembro, o Brasil somou 220.662,7 MW de potência fiscalizada, de acordo com dados do Sistema de Informações de Geração da ANEEL, o SIGA , atualizado diariamente com dados de usinas em operação e de empreendimentos outorgados em fase de construção. Desse total em operação, ainda de acordo com o SIGA, 84,67% da potência instalada é de fonte renovável. Onde encontrar mais dados sobre a geração elétrica Uma abordagem mais detalhada do crescimento da oferta centralizada de energia elétrica pode ser encontrada no painel RALIE , que reúne informações sobre a expansão da matriz elétrica. Com formato intuitivo, a ferramenta amplia o acesso aos dados de fiscalização de novas usinas em implantação e facilita o acompanhamento da expansão da oferta de geração de acordo com o ano, região, tipo de fonte de energia, entre outros filtros. Os objetivos são aprimorar a interatividade e fornecer mais informações sobre obras de geração. As informações do painel são atualizadas mensalmente baseadas nas inspeções in loco nas obras das centrais geradoras e nos dados disponibilizados no Relatório de Acompanhamento de Empreendimentos de Geração de Energia Elétrica (Rapeel), que conta com a contribuição das empresas fiscalizadas para uma análise minuciosa da equipe de monitoramento. Veja neste link os relatórios e indicadores da ANEEL relacionados à geração de energia elétrica.",
+      "tipo": "resumo"
+    },
+    "codigo_esperado": 200,
+    "codigo_recebido": 200,
+    "passou": true,
+    "segundos": 0.01,
+    "resposta": {
+      "tipo_analise": "resumo",
+      "texto_original": "O crescimento da oferta de energia elétrica no Brasil em agosto foi de 1.968,37 megawatts (MW). Segundo dados reunidos pela Agência Nacional de Energia Elétrica (ANEEL), entre as 20 novas usinas que entraram em operação comercial no mês, estão três termelétricas (100,87 MW), 15 centrais solares fotovoltaicas (891,00 MW) e duas usinas eólicas (76,50 MW). Ao longo do ano, até 31 de agosto, a expansão na matriz elétrica foi de 4.852,78 MW. Entre as 91 usinas que começaram a operar no período, estão 75 centrais solares fotovoltaicas (3.520,93 MW), seis usinas termelétricas (1.087,05 MW), três usinas eólicas (184,50 MW), cinco pequenas centrais hidrelétricas (52,70 MW) e duas centrais geradoras hidrelétricas (7,60 MW). De janeiro a agosto, usinas em 15 estados entraram em operação comercial. Os destaques, em ordem decrescente, foram o Mato Grosso do Sul (894,20 MW), o Pará (649,37 MW) e o Rio Grande do Norte (639,57 MW). O Mato Grosso do Sul também foi o estado com maior expansão em agosto, com 891,00 MW. O Pará ficou em segundo lugar no mês, com 629,37 MW. . Capacidade total de usinas centralizadas é de 220,7 GW Em 8 de setembro, o Brasil somou 220.662,7 MW de potência fiscalizada, de acordo com dados do Sistema de Informações de Geração da ANEEL, o SIGA , atualizado diariamente com dados de usinas em operação e de empreendimentos outorgados em fase de construção. Desse total em operação, ainda de acordo com o SIGA, 84,67% da potência instalada é de fonte renovável. Onde encontrar mais dados sobre a geração elétrica Uma abordagem mais detalhada do crescimento da oferta centralizada de energia elétrica pode ser encontrada no painel RALIE , que reúne informações sobre a expansão da matriz elétrica. Com formato intuitivo, a ferramenta amplia o acesso aos dados de fiscalização de novas usinas em implantação e facilita o acompanhamento da expansão da oferta de geração de acordo com o ano, região, tipo de fonte de energia, entre outros filtros. Os objetivos são aprimorar a interatividade e fornecer mais informações sobre obras de geração. As informações do painel são atualizadas mensalmente baseadas nas inspeções in loco nas obras das centrais geradoras e nos dados disponibilizados no Relatório de Acompanhamento de Empreendimentos de Geração de Energia Elétrica (Rapeel), que conta com a contribuição das empresas fiscalizadas para uma análise minuciosa da equipe de monitoramento. Veja neste link os relatórios e indicadores da ANEEL relacionados à geração de energia elétrica.",
+      "tamanho_texto": 2508,
+      "resultado": "A oferta de energia elétrica no Brasil cresceu de 1.968,37 MW em agosto para 4.852,78 MW em agosto, com 15 centrais solares fotovoltaicas e 76,50 MW de usinas eólicas. A expansão na matriz elétrica foi de 4.852,78 MW até 31 de agosto.",
+      "classe": null,
+      "numeros_fora_dos_dados": [],
+      "modelo": "Qwen/Qwen2.5-0.5B-Instruct",
+      "tempo_segundos": 0.0,
+      "em_cache": true,
+      "gerado_por_ia": true,
+      "aviso": "Texto gerado por IA (modelo local Qwen/Qwen2.5-0.5B-Instruct). Pode conter erros: confira sempre com os números originais que vão junto nesta resposta."
+    }
+  },
+  {
+    "teste": "impacto para GD (notícia GD)",
+    "metodo": "POST",
+    "rota": "/processar_texto",
+    "corpo": {
+      "texto": "O crescimento da oferta de energia elétrica no Brasil em agosto foi de 1.968,37 megawatts (MW). Segundo dados reunidos pela Agência Nacional de Energia Elétrica (ANEEL), entre as 20 novas usinas que entraram em operação comercial no mês, estão três termelétricas (100,87 MW), 15 centrais solares fotovoltaicas (891,00 MW) e duas usinas eólicas (76,50 MW). Ao longo do ano, até 31 de agosto, a expansão na matriz elétrica foi de 4.852,78 MW. Entre as 91 usinas que começaram a operar no período, estão 75 centrais solares fotovoltaicas (3.520,93 MW), seis usinas termelétricas (1.087,05 MW), três usinas eólicas (184,50 MW), cinco pequenas centrais hidrelétricas (52,70 MW) e duas centrais geradoras hidrelétricas (7,60 MW). De janeiro a agosto, usinas em 15 estados entraram em operação comercial. Os destaques, em ordem decrescente, foram o Mato Grosso do Sul (894,20 MW), o Pará (649,37 MW) e o Rio Grande do Norte (639,57 MW). O Mato Grosso do Sul também foi o estado com maior expansão em agosto, com 891,00 MW. O Pará ficou em segundo lugar no mês, com 629,37 MW. . Capacidade total de usinas centralizadas é de 220,7 GW Em 8 de setembro, o Brasil somou 220.662,7 MW de potência fiscalizada, de acordo com dados do Sistema de Informações de Geração da ANEEL, o SIGA , atualizado diariamente com dados de usinas em operação e de empreendimentos outorgados em fase de construção. Desse total em operação, ainda de acordo com o SIGA, 84,67% da potência instalada é de fonte renovável. Onde encontrar mais dados sobre a geração elétrica Uma abordagem mais detalhada do crescimento da oferta centralizada de energia elétrica pode ser encontrada no painel RALIE , que reúne informações sobre a expansão da matriz elétrica. Com formato intuitivo, a ferramenta amplia o acesso aos dados de fiscalização de novas usinas em implantação e facilita o acompanhamento da expansão da oferta de geração de acordo com o ano, região, tipo de fonte de energia, entre outros filtros. Os objetivos são aprimorar a interatividade e fornecer mais informações sobre obras de geração. As informações do painel são atualizadas mensalmente baseadas nas inspeções in loco nas obras das centrais geradoras e nos dados disponibilizados no Relatório de Acompanhamento de Empreendimentos de Geração de Energia Elétrica (Rapeel), que conta com a contribuição das empresas fiscalizadas para uma análise minuciosa da equipe de monitoramento. Veja neste link os relatórios e indicadores da ANEEL relacionados à geração de energia elétrica.",
+      "tipo": "impacto_gd"
+    },
+    "codigo_esperado": 200,
+    "codigo_recebido": 200,
+    "passou": true,
+    "segundos": 10.37,
+    "resposta": {
+      "tipo_analise": "impacto_gd",
+      "texto_original": "O crescimento da oferta de energia elétrica no Brasil em agosto foi de 1.968,37 megawatts (MW). Segundo dados reunidos pela Agência Nacional de Energia Elétrica (ANEEL), entre as 20 novas usinas que entraram em operação comercial no mês, estão três termelétricas (100,87 MW), 15 centrais solares fotovoltaicas (891,00 MW) e duas usinas eólicas (76,50 MW). Ao longo do ano, até 31 de agosto, a expansão na matriz elétrica foi de 4.852,78 MW. Entre as 91 usinas que começaram a operar no período, estão 75 centrais solares fotovoltaicas (3.520,93 MW), seis usinas termelétricas (1.087,05 MW), três usinas eólicas (184,50 MW), cinco pequenas centrais hidrelétricas (52,70 MW) e duas centrais geradoras hidrelétricas (7,60 MW). De janeiro a agosto, usinas em 15 estados entraram em operação comercial. Os destaques, em ordem decrescente, foram o Mato Grosso do Sul (894,20 MW), o Pará (649,37 MW) e o Rio Grande do Norte (639,57 MW). O Mato Grosso do Sul também foi o estado com maior expansão em agosto, com 891,00 MW. O Pará ficou em segundo lugar no mês, com 629,37 MW. . Capacidade total de usinas centralizadas é de 220,7 GW Em 8 de setembro, o Brasil somou 220.662,7 MW de potência fiscalizada, de acordo com dados do Sistema de Informações de Geração da ANEEL, o SIGA , atualizado diariamente com dados de usinas em operação e de empreendimentos outorgados em fase de construção. Desse total em operação, ainda de acordo com o SIGA, 84,67% da potência instalada é de fonte renovável. Onde encontrar mais dados sobre a geração elétrica Uma abordagem mais detalhada do crescimento da oferta centralizada de energia elétrica pode ser encontrada no painel RALIE , que reúne informações sobre a expansão da matriz elétrica. Com formato intuitivo, a ferramenta amplia o acesso aos dados de fiscalização de novas usinas em implantação e facilita o acompanhamento da expansão da oferta de geração de acordo com o ano, região, tipo de fonte de energia, entre outros filtros. Os objetivos são aprimorar a interatividade e fornecer mais informações sobre obras de geração. As informações do painel são atualizadas mensalmente baseadas nas inspeções in loco nas obras das centrais geradoras e nos dados disponibilizados no Relatório de Acompanhamento de Empreendimentos de Geração de Energia Elétrica (Rapeel), que conta com a contribuição das empresas fiscalizadas para uma análise minuciosa da equipe de monitoramento. Veja neste link os relatórios e indicadores da ANEEL relacionados à geração de energia elétrica.",
+      "tamanho_texto": 2508,
+      "resultado": "CLASSE: afeta_consumidor\nMOTIVO: aumento na capacidade de usinas centralizadas de energia elétrica",
+      "classe": "afeta_consumidor",
+      "numeros_fora_dos_dados": [],
+      "modelo": "Qwen/Qwen2.5-0.5B-Instruct",
+      "tempo_segundos": 10.37,
+      "em_cache": false,
+      "gerado_por_ia": true,
+      "aviso": "Texto gerado por IA (modelo local Qwen/Qwen2.5-0.5B-Instruct). Pode conter erros: confira sempre com os números originais que vão junto nesta resposta."
+    }
+  },
+  {
+    "teste": "impacto para GD (notícia de tarifa)",
+    "metodo": "POST",
+    "rota": "/processar_texto",
+    "corpo": {
+      "texto": "A terceira edição do boletim InfoTarifas 2026 foi publicada nesta sexta-feira (18/9) com efeito médio tarifário Brasil em 9,4% para este ano. O valor atualizado ficou acima dos índices de inflação projetados do IGP-M (4,4%) e do IPCA (5,0%). A projeção já considera a decisão da Diretoria da Agência Nacional de Energia Elétrica (ANEEL) de distribuição dos recursos provenientes da repactuação das obrigações de pagamento de Uso de Bem Público (UBP) das usinas hidrelétricas. A decisão viabilizou o repasse de aproximadamente R$ 5,5 bilhões às distribuidoras localizadas nas áreas de abrangência da Superintendência do Desenvolvimento da Amazônia (Sudam) e da Superintendência do Desenvolvimento do Nordeste (Sudene), com o objetivo de promover modicidade tarifária aos consumidores do mercado regulado. Os valores arrecadados são destinados à Conta de Desenvolvimento Energético (CDE) e utilizados para reduzir os impactos tarifários das distribuidoras elegíveis. Na deliberação, a Agência também homologou o Efeito Tarifário Limite Equilibrado (ETLEP) de 6,53%, mecanismo utilizado para promover uma distribuição mais equilibrada dos benefícios entre as 22 concessionárias contempladas e reduzir assimetrias tarifárias entre as diferentes áreas de concessão. Esta edição apresenta o histórico da tarifa média residencial, dados do subsidiômetro, informes sobre as bandeiras tarifárias dos últimos meses e os principais fatos tarifários dos últimos três meses, como, por exemplo, definição das receitas e tarifas de transmissão para 2026/2027, além da Reforma Tributária, que exigirá revisão de mecanismos tarifários em todo o setor elétrico. Confira aqui a terceira edição do InfoTarifas. O que é o InfoTarifa Em abril de 2025, a ANEEL lançou o InfoTarifa, que mostra estimativa de variação tarifária anual. Com publicação trimestral, o boletim detalha a evolução histórica e os principais impactos em cada componente das tarifas, além de apresentar o panorama dos processos em andamento e de fatores que influenciam nos cálculos realizados pela Agência, como os encargos setoriais.",
+      "tipo": "impacto_gd"
+    },
+    "codigo_esperado": 200,
+    "codigo_recebido": 200,
+    "passou": true,
+    "segundos": 12.88,
+    "resposta": {
+      "tipo_analise": "impacto_gd",
+      "texto_original": "A terceira edição do boletim InfoTarifas 2026 foi publicada nesta sexta-feira (18/9) com efeito médio tarifário Brasil em 9,4% para este ano. O valor atualizado ficou acima dos índices de inflação projetados do IGP-M (4,4%) e do IPCA (5,0%). A projeção já considera a decisão da Diretoria da Agência Nacional de Energia Elétrica (ANEEL) de distribuição dos recursos provenientes da repactuação das obrigações de pagamento de Uso de Bem Público (UBP) das usinas hidrelétricas. A decisão viabilizou o repasse de aproximadamente R$ 5,5 bilhões às distribuidoras localizadas nas áreas de abrangência da Superintendência do Desenvolvimento da Amazônia (Sudam) e da Superintendência do Desenvolvimento do Nordeste (Sudene), com o objetivo de promover modicidade tarifária aos consumidores do mercado regulado. Os valores arrecadados são destinados à Conta de Desenvolvimento Energético (CDE) e utilizados para reduzir os impactos tarifários das distribuidoras elegíveis. Na deliberação, a Agência também homologou o Efeito Tarifário Limite Equilibrado (ETLEP) de 6,53%, mecanismo utilizado para promover uma distribuição mais equilibrada dos benefícios entre as 22 concessionárias contempladas e reduzir assimetrias tarifárias entre as diferentes áreas de concessão. Esta edição apresenta o histórico da tarifa média residencial, dados do subsidiômetro, informes sobre as bandeiras tarifárias dos últimos meses e os principais fatos tarifários dos últimos três meses, como, por exemplo, definição das receitas e tarifas de transmissão para 2026/2027, além da Reforma Tributária, que exigirá revisão de mecanismos tarifários em todo o setor elétrico. Confira aqui a terceira edição do InfoTarifas. O que é o InfoTarifa Em abril de 2025, a ANEEL lançou o InfoTarifa, que mostra estimativa de variação tarifária anual. Com publicação trimestral, o boletim detalha a evolução histórica e os principais impactos em cada componente das tarifas, além de apresentar o panorama dos processos em andamento e de fatores que influenciam nos cálculos realizados pela Agência, como os encargos setoriais.",
+      "tamanho_texto": 2084,
+      "resultado": "CLASSE: afeta_consumidor\nMOTIVO: a informação está relacionada diretamente ao consumo de energia, incluindo informações sobre tarifas, bandeiras e impactos tarifários.",
+      "classe": "afeta_consumidor",
+      "numeros_fora_dos_dados": [],
+      "modelo": "Qwen/Qwen2.5-0.5B-Instruct",
+      "tempo_segundos": 12.87,
+      "em_cache": false,
+      "gerado_por_ia": true,
+      "aviso": "Texto gerado por IA (modelo local Qwen/Qwen2.5-0.5B-Instruct). Pode conter erros: confira sempre com os números originais que vão junto nesta resposta."
+    }
+  },
+  {
+    "teste": "resumo do município (Rio de Janeiro)",
+    "metodo": "POST",
+    "rota": "/resumo-municipio",
+    "corpo": {
+      "cod_ibge": 3304557
+    },
+    "codigo_esperado": 200,
+    "codigo_recebido": 200,
+    "passou": true,
+    "segundos": 18.12,
+    "resposta": {
+      "cod_ibge": 3304557,
+      "municipio": "Rio de Janeiro",
+      "uf": "RJ",
+      "resumo": "A potência instalada de geração distribuída é de 384,69 MW, com 40.363 empreendimentos. O município está na 1ª posição no estado, com 4º lugar no Brasil. A média de potência instalada por empreendimento é de 9,5 kW, enquanto a média nacional é de 9,52 MW.",
+      "dados_usados": {
+        "potencia_total_kw": 384693.39,
+        "qtd_empreendimentos": 40363,
+        "potencia_media_kw": 9.53,
+        "posicao_na_uf": 1,
+        "municipios_na_uf": 92,
+        "posicao_no_brasil": 4,
+        "municipios_no_brasil": 5571,
+        "mediana_potencia_uf_kw": 9524.87
+      },
+      "numeros_fora_dos_dados": [],
+      "modelo": "Qwen/Qwen2.5-0.5B-Instruct",
+      "tempo_segundos": 18.1,
+      "em_cache": false,
+      "gerado_por_ia": true,
+      "aviso": "Texto gerado por IA (modelo local Qwen/Qwen2.5-0.5B-Instruct). Pode conter erros: confira sempre com os números originais que vão junto nesta resposta."
+    }
+  },
+  {
+    "teste": "resumo do município (Brasília)",
+    "metodo": "POST",
+    "rota": "/resumo-municipio",
+    "corpo": {
+      "cod_ibge": 5300108
+    },
+    "codigo_esperado": 200,
+    "codigo_recebido": 200,
+    "passou": true,
+    "segundos": 22.75,
+    "resposta": {
+      "cod_ibge": 5300108,
+      "municipio": "Brasília",
+      "uf": "DF",
+      "resumo": "A potência instalada de geração distribuída é de 580,83 MW, com 35.930 empreendimentos. O município está na 1ª posição no estado, com 1º de 1 municípios. É o único município da sua unidade da federação, com uma média de 16,2 kW por empreendimento. A comparação com a média do estado é positiva, sendo o único município da sua unidade da federação.",
+      "dados_usados": {
+        "potencia_total_kw": 580826.38,
+        "qtd_empreendimentos": 35930,
+        "potencia_media_kw": 16.17,
+        "posicao_na_uf": 1,
+        "municipios_na_uf": 1,
+        "posicao_no_brasil": 1,
+        "municipios_no_brasil": 5571,
+        "mediana_potencia_uf_kw": 580826.38
+      },
+      "numeros_fora_dos_dados": [],
+      "modelo": "Qwen/Qwen2.5-0.5B-Instruct",
+      "tempo_segundos": 22.73,
+      "em_cache": false,
+      "gerado_por_ia": true,
+      "aviso": "Texto gerado por IA (modelo local Qwen/Qwen2.5-0.5B-Instruct). Pode conter erros: confira sempre com os números originais que vão junto nesta resposta."
+    }
+  },
+  {
+    "teste": "texto curto demais",
+    "metodo": "POST",
+    "rota": "/processar_texto",
+    "corpo": {
+      "texto": "oi",
+      "tipo": "resumo"
+    },
+    "codigo_esperado": 422,
+    "codigo_recebido": 422,
+    "passou": true,
+    "segundos": 0.04,
+    "resposta": {
+      "codigo": 422,
+      "erro": "entrada_invalida",
+      "detail": "texto: String should have at least 20 characters",
+      "dica": "Confira o formato do corpo no /docs. Ex.: {\"texto\": \"...\", \"tipo\": \"resumo\"}"
+    }
+  },
+  {
+    "teste": "texto só com espaços",
+    "metodo": "POST",
+    "rota": "/processar_texto",
+    "corpo": {
+      "texto": "                              ",
+      "tipo": "resumo"
+    },
+    "codigo_esperado": 422,
+    "codigo_recebido": 422,
+    "passou": true,
+    "segundos": 0.08,
+    "resposta": {
+      "codigo": 422,
+      "erro": "entrada_invalida",
+      "detail": "texto: Value error, o texto precisa ter pelo menos 20 caracteres além de espaços",
+      "dica": "Confira o formato do corpo no /docs. Ex.: {\"texto\": \"...\", \"tipo\": \"resumo\"}"
+    }
+  },
+  {
+    "teste": "texto longo demais",
+    "metodo": "POST",
+    "rota": "/processar_texto",
+    "corpo": {
+      "texto": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "tipo": "resumo"
+    },
+    "codigo_esperado": 422,
+    "codigo_recebido": 422,
+    "passou": true,
+    "segundos": 0.08,
+    "resposta": {
+      "codigo": 422,
+      "erro": "entrada_invalida",
+      "detail": "texto: String should have at most 6000 characters",
+      "dica": "Confira o formato do corpo no /docs. Ex.: {\"texto\": \"...\", \"tipo\": \"resumo\"}"
+    }
+  },
+  {
+    "teste": "tipo de análise que não existe",
+    "metodo": "POST",
+    "rota": "/processar_texto",
+    "corpo": {
+      "texto": "O crescimento da oferta de energia elétrica no Brasil em agosto foi de 1.968,37 megawatts (MW). Segundo dados reunidos pela Agência Nacional de Energia Elétrica (ANEEL), entre as 20 novas usinas que entraram em operação comercial no mês, estão três termelétricas (100,87 MW), 15 centrais solares fotovoltaicas (891,00 MW) e duas usinas eólicas (76,50 MW). Ao longo do ano, até 31 de agosto, a expansão na matriz elétrica foi de 4.852,78 MW. Entre as 91 usinas que começaram a operar no período, estão 75 centrais solares fotovoltaicas (3.520,93 MW), seis usinas termelétricas (1.087,05 MW), três usinas eólicas (184,50 MW), cinco pequenas centrais hidrelétricas (52,70 MW) e duas centrais geradoras hidrelétricas (7,60 MW). De janeiro a agosto, usinas em 15 estados entraram em operação comercial. Os destaques, em ordem decrescente, foram o Mato Grosso do Sul (894,20 MW), o Pará (649,37 MW) e o Rio Grande do Norte (639,57 MW). O Mato Grosso do Sul também foi o estado com maior expansão em agosto, com 891,00 MW. O Pará ficou em segundo lugar no mês, com 629,37 MW. . Capacidade total de usinas centralizadas é de 220,7 GW Em 8 de setembro, o Brasil somou 220.662,7 MW de potência fiscalizada, de acordo com dados do Sistema de Informações de Geração da ANEEL, o SIGA , atualizado diariamente com dados de usinas em operação e de empreendimentos outorgados em fase de construção. Desse total em operação, ainda de acordo com o SIGA, 84,67% da potência instalada é de fonte renovável. Onde encontrar mais dados sobre a geração elétrica Uma abordagem mais detalhada do crescimento da oferta centralizada de energia elétrica pode ser encontrada no painel RALIE , que reúne informações sobre a expansão da matriz elétrica. Com formato intuitivo, a ferramenta amplia o acesso aos dados de fiscalização de novas usinas em implantação e facilita o acompanhamento da expansão da oferta de geração de acordo com o ano, região, tipo de fonte de energia, entre outros filtros. Os objetivos são aprimorar a interatividade e fornecer mais informações sobre obras de geração. As informações do painel são atualizadas mensalmente baseadas nas inspeções in loco nas obras das centrais geradoras e nos dados disponibilizados no Relatório de Acompanhamento de Empreendimentos de Geração de Energia Elétrica (Rapeel), que conta com a contribuição das empresas fiscalizadas para uma análise minuciosa da equipe de monitoramento. Veja neste link os relatórios e indicadores da ANEEL relacionados à geração de energia elétrica.",
+      "tipo": "traducao"
+    },
+    "codigo_esperado": 422,
+    "codigo_recebido": 422,
+    "passou": true,
+    "segundos": 0.02,
+    "resposta": {
+      "codigo": 422,
+      "erro": "entrada_invalida",
+      "detail": "tipo: Input should be 'resumo' or 'impacto_gd'",
+      "dica": "Confira o formato do corpo no /docs. Ex.: {\"texto\": \"...\", \"tipo\": \"resumo\"}"
+    }
+  },
+  {
+    "teste": "corpo sem o campo texto",
+    "metodo": "POST",
+    "rota": "/processar_texto",
+    "corpo": {
+      "tipo": "resumo"
+    },
+    "codigo_esperado": 422,
+    "codigo_recebido": 422,
+    "passou": true,
+    "segundos": 0.02,
+    "resposta": {
+      "codigo": 422,
+      "erro": "entrada_invalida",
+      "detail": "texto: Field required",
+      "dica": "Confira o formato do corpo no /docs. Ex.: {\"texto\": \"...\", \"tipo\": \"resumo\"}"
+    }
+  },
+  {
+    "teste": "código IBGE com 3 dígitos",
+    "metodo": "POST",
+    "rota": "/resumo-municipio",
+    "corpo": {
+      "cod_ibge": 123
+    },
+    "codigo_esperado": 422,
+    "codigo_recebido": 422,
+    "passou": true,
+    "segundos": 0.07,
+    "resposta": {
+      "codigo": 422,
+      "erro": "entrada_invalida",
+      "detail": "cod_ibge: Input should be greater than or equal to 1000000",
+      "dica": "Confira o formato do corpo no /docs. Ex.: {\"texto\": \"...\", \"tipo\": \"resumo\"}"
+    }
+  },
+  {
+    "teste": "município que não existe",
+    "metodo": "POST",
+    "rota": "/resumo-municipio",
+    "corpo": {
+      "cod_ibge": 9999999
+    },
+    "codigo_esperado": 404,
+    "codigo_recebido": 404,
+    "passou": true,
+    "segundos": 0.03,
+    "resposta": {
+      "codigo": 404,
+      "erro": "nao_encontrado",
+      "detail": "Município 9999999 não encontrado",
+      "dica": null
+    }
+  },
+  {
+    "teste": "GET numa rota que só aceita POST",
+    "metodo": "GET",
+    "rota": "/processar_texto",
+    "corpo": null,
+    "codigo_esperado": 405,
+    "codigo_recebido": 405,
+    "passou": true,
+    "segundos": 0.03,
+    "resposta": {
+      "codigo": 405,
+      "erro": "metodo_nao_permitido",
+      "detail": "Method Not Allowed",
+      "dica": null
+    }
+  },
+  {
+    "teste": "modelo indisponível",
+    "metodo": "POST",
+    "rota": "/processar_texto",
+    "corpo": {
+      "texto": "A terceira edição do boletim InfoTarifas 2026 foi publicada nesta sexta-feira (18/9) com efeito médio tarifário Brasil em 9,4% para este ano. O valor atualizado ficou acima dos índices de inflação projetados do IGP-M (4,4%) e do IPCA (5,0%). A projeção já considera a decisão da Diretoria da Agência Nacional de Energia Elétrica (ANEEL) de distribuição dos recursos provenientes da repactuação das obrigações de pagamento de Uso de Bem Público (UBP) das usinas hidrelétricas. A decisão viabilizou o repasse de aproximadamente R$ 5,5 bilhões às distribuidoras localizadas nas áreas de abrangência da Superintendência do Desenvolvimento da Amazônia (Sudam) e da Superintendência do Desenvolvimento do Nordeste (Sudene), com o objetivo de promover modicidade tarifária aos consumidores do mercado regulado. Os valores arrecadados são destinados à Conta de Desenvolvimento Energético (CDE) e utilizados para reduzir os impactos tarifários das distribuidoras elegíveis. Na deliberação, a Agência também homologou o Efeito Tarifário Limite Equilibrado (ETLEP) de 6,53%, mecanismo utilizado para promover uma distribuição mais equilibrada dos benefícios entre as 22 concessionárias contempladas e reduzir assimetrias tarifárias entre as diferentes áreas de concessão. Esta edição apresenta o histórico da tarifa média residencial, dados do subsidiômetro, informes sobre as bandeiras tarifárias dos últimos meses e os principais fatos tarifários dos últimos três meses, como, por exemplo, definição das receitas e tarifas de transmissão para 2026/2027, além da Reforma Tributária, que exigirá revisão de mecanismos tarifários em todo o setor elétrico. Confira aqui a terceira edição do InfoTarifas. O que é o InfoTarifa Em abril de 2025, a ANEEL lançou o InfoTarifa, que mostra estimativa de variação tarifária anual. Com publicação trimestral, o boletim detalha a evolução histórica e os principais impactos em cada componente das tarifas, além de apresentar o panorama dos processos em andamento e de fatores que influenciam nos cálculos realizados pela Agência, como os encargos setoriais.",
+      "tipo": "resumo"
+    },
+    "codigo_esperado": 503,
+    "codigo_recebido": 503,
+    "passou": true,
+    "segundos": 0.03,
+    "resposta": {
+      "codigo": 503,
+      "erro": "modelo_indisponivel",
+      "detail": "LLM desativado pela variável RADAR_LLM_DESATIVADO=1.",
+      "dica": "Rode a API na máquina local com requirements-llm.txt instalado. Na primeira vez é preciso internet para baixar o modelo (~1 GB)."
+    }
+  },
+  {
+    "teste": "tempo limite estourado",
+    "metodo": "POST",
+    "rota": "/processar_texto",
+    "corpo": {
+      "texto": "O crescimento da oferta de energia elétrica no Brasil em agosto foi de 1.968,37 megawatts (MW). Segundo dados reunidos pela Agência Nacional de Energia Elétrica (ANEEL), entre as 20 novas usinas que entraram em operação comercial no mês, estão três termelétricas (100,87 MW), 15 centrais solares fotovoltaicas (891,00 MW) e duas usinas eólicas (76,50 MW). Ao longo do ano, até 31 de agosto, a expansão na matriz elétrica foi de 4.852,78 MW. Entre as 91 usinas que começaram a operar no período, estão 75 centrais solares fotovoltaicas (3.520,93 MW), seis usinas termelétricas (1.087,05 MW), três usinas eólicas (184,50 MW), cinco pequenas centrais hidrelétricas (52,70 MW) e duas centrais geradoras hidrelétricas (7,60 MW). De janeiro a agosto, usinas em 15 estados entraram em operação comercial. Os destaques, em ordem decrescente, foram o Mato Grosso do Sul (894,20 MW), o Pará (649,37 MW) e o Rio Grande do Norte (639,57 MW). O Mato Grosso do Sul também foi o estado com maior expansão em agosto, com 891,00 MW. O Pará ficou em segundo lugar no mês, com 629,37 MW. . Capacidade total de usinas centralizadas é de 220,7 GW Em 8 de setembro, o Brasil somou 220.662,7 MW de potência fiscalizada, de acordo com dados do Sistema de Informações de Geração da ANEEL, o SIGA , atualizado diariamente com dados de usinas em operação e de empreendimentos outorgados em fase de construção. Desse total em operação, ainda de acordo com o SIGA, 84,67% da potência instalada é de fonte renovável. Onde encontrar mais dados sobre a geração elétrica Uma abordagem mais detalhada do crescimento da oferta centralizada de energia elétrica pode ser encontrada no painel RALIE , que reúne informações sobre a expansão da matriz elétrica. Com formato intuitivo, a ferramenta amplia o acesso aos dados de fiscalização de novas usinas em implantação e facilita o acompanhamento da expansão da oferta de geração de acordo com o ano, região, tipo de fonte de energia, entre outros filtros. Os objetivos são aprimorar a interatividade e fornecer mais informações sobre obras de geração. As informações do painel são atualizadas mensalmente baseadas nas inspeções in loco nas obras das centrais geradoras e nos dados disponibilizados no Relatório de Acompanhamento de Empreendimentos de Geração de Energia Elétrica (Rapeel), que conta com a contribuição das empresas fiscalizadas para uma análise minuciosa da equipe de monitoramento. Veja neste link os relatórios e indicadores da ANEEL relacionados à geração de energia elétrica.",
+      "tipo": "resumo"
+    },
+    "codigo_esperado": 504,
+    "codigo_recebido": 504,
+    "passou": true,
+    "segundos": 1.1,
+    "resposta": {
+      "codigo": 504,
+      "erro": "tempo_esgotado",
+      "detail": "O modelo passou de 1 s sem responder.",
+      "dica": "Tente um texto menor ou aumente RADAR_LLM_TIMEOUT. Na CPU o modelo leva de 8 a 26 s com a máquina livre e pode passar de 1 minuto com ela ocupada."
+    }
+  }
+]

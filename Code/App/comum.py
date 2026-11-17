@@ -188,15 +188,22 @@ def iniciar_api_local():
     return "iniciada pelo app"
 
 
-def chamar_api(metodo, rota, **kwargs):
-    # devolve (json, erro). a pagina mostra o erro na tela em vez de quebrar
+def chamar_api(metodo, rota, timeout=10, **kwargs):
+    # devolve (json, erro). a pagina mostra o erro na tela em vez de quebrar.
+    # TP4: o timeout virou parametro pq as rotas de LLM demoram mais (o modelo
+    # roda na CPU), e a dica que a API manda no erro aparece junto
     try:
-        resposta = requests.request(metodo, API_URL + rota, timeout=10, **kwargs)
+        resposta = requests.request(metodo, API_URL + rota, timeout=timeout, **kwargs)
+    except requests.Timeout:
+        return None, "A API demorou mais de %d s para responder." % timeout
     except requests.RequestException as erro:
         return None, "Não consegui falar com a API em %s (%s)" % (API_URL, erro.__class__.__name__)
     if not resposta.ok:
         try:
-            detalhe = resposta.json().get("detail")
+            corpo = resposta.json()
+            detalhe = corpo.get("detail")
+            if corpo.get("dica"):
+                detalhe = "%s. Dica: %s" % (str(detalhe).rstrip("."), corpo["dica"])
         except ValueError:
             detalhe = resposta.text
         return None, "A API respondeu %d: %s" % (resposta.status_code, detalhe)

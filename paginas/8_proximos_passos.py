@@ -7,6 +7,13 @@ import streamlit as st
 import comum
 
 st.header("Próximos passos: IA com LLM")
+# TP4: o plano abaixo e de quando ainda nao tinha LLM. deixei como registro e
+# aviso aqui o que ja foi feito
+st.success(
+    "Atualização do TP4: as prioridades 1, 2 e 3 deste plano já estão funcionando na página "
+    "**IA local (LLM)**, com o modelo Qwen2.5-0.5B-Instruct rodando na própria máquina. Ficaram para o "
+    "TP5 a comparação da classificação com uma amostra rotulada à mão e o Q&A usando as rotas da API."
+)
 st.write(
     "No TP4 o painel ganha recursos de LLM. Em vez de escolher a tarefa primeiro e "
     "procurar dado depois, partir do que já está coletado e ver onde um modelo de "

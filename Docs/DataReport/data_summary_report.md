@@ -2,7 +2,7 @@
 
 **Projeto:** Radar Solar Municipal
 **Autor:** Rafael Celestino Tomiazi
-**Data:** 24 de agosto de 2026 (TP1), atualizado em 21 de setembro de 2026 (TP2) e em 19 de outubro de 2026 (TP3)
+**Data:** 24 de agosto de 2026 (TP1), atualizado em 21 de setembro de 2026 (TP2), em 19 de outubro de 2026 (TP3) e em 16 de novembro de 2026 (TP4)
 
 O Data Summary Report é o documento da fase de Data Acquisition & Understanding do TDSP. A primeira versão, do TP1, cobria a base da ANEEL e a malha do IBGE. No TP2 entraram as notícias do site da ANEEL, extraídas com Beautiful Soup, a estimativa de população do IBGE e os arquivos que o próprio usuário envia pelo painel. No TP3 entrou a geração por fonte do ONS, extraída com Selenium de uma página dinâmica, e a API do próprio projeto, que passou a ser uma forma de acessar os dados. Documentei só as colunas que eu uso de fato, não as 31 do arquivo original da ANEEL.
 
@@ -45,6 +45,10 @@ A coleta de 19/10/2026 às 18h17 trouxe 90,6 GW de geração total, 83,5% renov�
 ### API do Radar Solar (novo no TP3)
 
 Não é uma fonte externa, é a forma nova de acessar os dados processados. A API em `Code/API/api.py` lê o `data/processed/cobertura_municipios.csv` quando sobe e serve esses dados por HTTP. A página Consulta via API do app usa essa API em vez de ler o CSV. No TP4 ela vai ser o caminho pelo qual a LLM consulta números exatos.
+
+### Texto gerado pelo LLM local (novo no TP4)
+
+O modelo `Qwen/Qwen2.5-0.5B-Instruct` (HuggingFace, Apache 2.0) roda dentro da API e gera dois tipos de dado derivado: o resumo ou a classificação de uma notícia da ANEEL (a partir da coluna `texto` de `noticias_aneel.csv`) e a ficha do município em linguagem simples (a partir das colunas de `cobertura_municipios.csv` e da posição no ranking calculada na hora). Esse texto não é gravado em arquivo: fica num cache em memória enquanto a API está no ar, porque é derivado e pode ser refeito a qualquer momento. Toda resposta leva junto os números de origem (`dados_usados`) e a lista de números citados pelo modelo que não existem na origem (`numeros_fora_dos_dados`). O único arquivo novo é `Docs/LLM/testes_api_llm.json`, com as chamadas do teste das rotas e as respostas recebidas. Limitação: o texto gerado pode trocar o rótulo de um número certo (chamar a mediana do estado de "média nacional"), o que a checagem automática não pega; por isso ele nunca aparece sem os números originais ao lado.
 
 ### Dados enviados pelo usuário (novo no TP2)
 

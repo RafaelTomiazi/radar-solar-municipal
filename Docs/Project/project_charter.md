@@ -4,7 +4,7 @@
 **Autor:** Rafael Celestino Tomiazi
 **Disciplina:** Projeto de Bloco, Inteligência Artificial Aplicada, Instituto Infnet
 **Professor:** Renan Silva Santos
-**Data:** 24 de agosto de 2026 (TP1), atualizado em 21 de setembro de 2026 (TP2) e em 19 de outubro de 2026 (TP3)
+**Data:** 24 de agosto de 2026 (TP1), atualizado em 21 de setembro de 2026 (TP2), em 19 de outubro de 2026 (TP3) e em 16 de novembro de 2026 (TP4)
 
 ## 1. Problema de negócio
 
@@ -151,3 +151,13 @@ Parti do que já está coletado para escolher as tarefas, em ordem de prioridade
 | Perguntas e respostas (Q&A) | Rotas da API como ferramentas do modelo | Responder perguntas como "5 municípios do Piauí com mais potência" sem mexer em filtro. Fica por último por ser o mais arriscado |
 
 Em todas, o número citado no texto gerado tem que vir do dado enviado ao modelo, a resposta aparece marcada como gerada por IA, a chave da API do modelo fica fora do código e as respostas ficam em cache por município e por notícia.
+
+## 11. Execução do LLM no TP4
+
+O enunciado do TP4 pediu que o modelo rodasse localmente, carregado com a biblioteca Transformers da HuggingFace, sem depender de serviço na nuvem. Isso mudou um ponto do plano da seção 10, que previa chave de API em `.env`: não há mais chave nenhuma, o modelo é baixado uma vez e roda na CPU da máquina. Comparei nove candidatos (GPT-2, BERTimbau, FLAN-T5, PTT5, TinyLlama, Llama 3.2 1B, Phi-3.5 mini, Qwen2.5 1.5B e Qwen2.5 0.5B) por desempenho na tarefa, custo computacional local e acessibilidade, e escolhi o `Qwen/Qwen2.5-0.5B-Instruct`: é instruído, lê e escreve português, cabe em uns 2 GB de RAM, não precisa de GPU e tem licença Apache 2.0 sem login. A comparação completa e o passo a passo da integração estão em `Docs/Project/integracao_llm.md`.
+
+Das prioridades da seção 10, entreguei a 1 (ficha do município em linguagem simples, rota `POST /resumo-municipio`), a 2 (resumo das notícias da ANEEL, `POST /processar_texto` com `tipo=resumo`) e a 3 (classificação do impacto para GD, `tipo=impacto_gd`). Os cuidados combinados ficaram assim: resposta marcada como gerada por IA, números originais ao lado (`dados_usados`), cache por município e por notícia (`lru_cache`), e uma checagem nova que eu não tinha previsto, que lista os números citados pelo modelo que não aparecem nos dados de origem (`numeros_fora_dos_dados`).
+
+A avaliação da classificação contra a marcação por palavra-chave numa amostra rotulada à mão ficou para o TP5, junto com o Q&A usando as rotas da API como ferramentas. Na primeira bateria de testes o modelo classificou como "afeta o consumidor" uma notícia que a palavra-chave marcava como GD, e lendo a notícia ela fala de usinas centralizadas, então a palavra-chave é que estava errada; isso reforça que a comparação precisa de rótulo humano.
+
+Riscos novos: a qualidade de um modelo de 0,5 bilhão de parâmetros é limitada (já vi ele trocar o rótulo de um número, chamando a mediana do estado de "média nacional"), e o tempo de resposta na CPU fica entre 8 e 26 segundos com a máquina livre, passando de 1 minuto quando ela está ocupada com outros programas. A mitigação é o roteiro fechado no prompt, a checagem de números, o cache e a variável `RADAR_LLM_MODELO` para trocar por um modelo maior em máquina melhor.

@@ -13,7 +13,8 @@ Aluno: Rafael Celestino Tomiazi
 |---|---|---|
 | TP1 | Proposta, Project Charter, Data Summary Report, coleta ANEEL/IBGE, processamento e app demo | tag [`tp1`](https://github.com/RafaelTomiazi/radar-solar-municipal/tree/tp1) |
 | TP2 | Git e deploy, interface interativa, scraping com Beautiful Soup, nuvem de palavras e estatísticas, cache e estado de sessão, upload/download de CSV, documentos atualizados | tag [`tp2`](https://github.com/RafaelTomiazi/radar-solar-municipal/tree/tp2) |
-| TP3 | App multipágina com menu de navegação, API com FastAPI integrada ao app, scraping da página dinâmica do ONS com Selenium, documentos revisados e planejamento do uso de LLM | branch `main` e [histórico de commits](https://github.com/RafaelTomiazi/radar-solar-municipal/commits/main) |
+| TP3 | App multipágina com menu de navegação, API com FastAPI integrada ao app, scraping da página dinâmica do ONS com Selenium, documentos revisados e planejamento do uso de LLM | tag [`tp3`](https://github.com/RafaelTomiazi/radar-solar-municipal/tree/tp3) |
+| TP4 | LLM local da HuggingFace (Qwen2.5-0.5B-Instruct) integrado à API FastAPI, rotas `/processar_texto` e `/resumo-municipio` com Response Models, tratamento de erros HTTP padronizado, página "IA local (LLM)" no app e documentação da escolha do modelo | tag [`tp4`](https://github.com/RafaelTomiazi/radar-solar-municipal/tree/tp4) e [integração do LLM](Docs/Project/integracao_llm.md) |
 
 ### Correções feitas a partir do retorno do TP1
 
@@ -38,12 +39,13 @@ A organização segue as fases do ciclo de vida do TDSP.
 ├── Code/
 │   ├── DataAcquisition/     coleta nas APIs da ANEEL e do IBGE, scraping das notícias (Beautiful Soup) e do ONS (Selenium)
 │   ├── DataPreparation/     processamento e agregação
-│   ├── API/                 API com FastAPI que serve os dados por município (TP3)
+│   ├── API/                 API com FastAPI (TP3), LLM local e teste das rotas de LLM (TP4)
 │   └── App/                 código comum às páginas, texto/nuvem de palavras e upload
 ├── paginas/                 uma página do app por arquivo (TP3)
 ├── Docs/
-│   ├── Project/             Project Charter
+│   ├── Project/             Project Charter e integração do LLM (TP4)
 │   ├── DataReport/          Data Summary Report
+│   ├── LLM/                 resultado dos testes das rotas de LLM (JSON)
 │   └── Prints/              prints da aplicação
 ├── Sample_Data/             amostras versionadas e exemplo de CSV para upload
 ├── data/
@@ -51,7 +53,8 @@ A organização segue as fases do ciclo de vida do TDSP.
 │   ├── external/            notícias da ANEEL (Beautiful Soup) e geração do ONS (Selenium), em CSV e TXT
 │   └── processed/           saída do pipeline
 ├── app.py                   entrada do app: menu de navegação e filtros
-└── requirements.txt
+├── requirements.txt
+└── requirements-llm.txt     extras para rodar o LLM local (torch, transformers)
 ```
 
 O nome da pasta das páginas é `paginas/` e não `pages/` de propósito. Com `pages/`, o Streamlit ativa o modo antigo de multipágina e executa cada arquivo direto, sem passar pelo `app.py`, e aí o menu e os filtros somem. Descobri isso testando.
@@ -140,11 +143,39 @@ curl -X POST http://localhost:8000/indicador-por-habitante \
      -H "Content-Type: application/json" -d '{"cod_ibge": 3304557, "populacao": 6211000}'
 ```
 
+### LLM local (TP4)
+
+O modelo de linguagem roda na própria máquina, sem serviço na nuvem. Para ativar, instale os extras (o PyTorch só CPU tem uns 200 MB):
+
+```bash
+pip install -r requirements-llm.txt --extra-index-url https://download.pytorch.org/whl/cpu
+```
+
+Na primeira chamada a API baixa o `Qwen/Qwen2.5-0.5B-Instruct` da HuggingFace (~950 MB, fica em `~/.cache/huggingface`); depois funciona sem internet. Precisa de uns 2 GB de RAM livres e não precisa de GPU. Rotas novas:
+
+| Método | Rota | O que faz |
+|---|---|---|
+| GET | `/llm/status` | Modelo, se está carregado e se as bibliotecas existem |
+| POST | `/llm/carregar` | Carrega o modelo na memória |
+| POST | `/processar_texto` | `{"texto": "...", "tipo": "resumo"}` ou `"tipo": "impacto_gd"` |
+| POST | `/resumo-municipio` | `{"cod_ibge": 3304557}`: parágrafo para o gestor com os números usados |
+
+```bash
+curl -X POST http://localhost:8000/resumo-municipio -H "Content-Type: application/json" -d '{"cod_ibge": 3304557}'
+python Code/API/testa_api_llm.py      # testa todas as rotas de LLM, inclusive os erros
+```
+
+Variáveis opcionais: `RADAR_LLM_MODELO` (troca o modelo, por exemplo `Qwen/Qwen2.5-1.5B-Instruct`), `RADAR_LLM_TIMEOUT` (segundos, padrão 180) e `RADAR_LLM_DESATIVADO=1`. Sem os extras instalados, como no Streamlit Cloud, as rotas de LLM respondem 503 explicando o motivo e o resto do app funciona normal. A justificativa da escolha do modelo e o passo a passo da integração estão em [`Docs/Project/integracao_llm.md`](Docs/Project/integracao_llm.md).
+
 A coleta baixa uns 101 MB da ANEEL e levou por volta de 40 segundos aqui. O processamento chegou a uns 700 MB de memória no pico, então convém não deixar muita coisa aberta junto.
 
 ## O que o app faz
 
 No TP3 as abas viraram páginas, com um menu de navegação na barra lateral dividido em Análise, Dados coletados e Projeto. Os filtros de região e UF continuam na barra lateral e valem em todas as páginas.
+
+Novidade do TP4, na seção Inteligência artificial do menu:
+
+- **IA local (LLM):** o painel manda texto para a API e a API roda o Qwen2.5-0.5B-Instruct localmente. Dá para resumir uma notícia da ANEEL em linguagem simples, classificar o impacto dela para a geração distribuída (afeta GD, afeta o consumidor em geral ou não afeta), gerar a ficha de um município em linguagem simples para o gestor e testar um texto livre. Toda resposta vem marcada como gerada por IA, com os números originais ao lado e um aviso se o modelo citar algum número que não está nos dados.
 
 Novidades do TP3:
 
@@ -173,6 +204,13 @@ Do TP2, mantidas:
 2. **API:** na página Consulta via API, digite `PI` no campo UF e clique em Consultar ranking. Depois, na aba POST, clique em Enviar. Para ver a API direto, abra http://localhost:8000/docs.
 3. **Selenium:** a página Geração agora (ONS) mostra o resultado da última coleta. Para coletar de novo, rode `python Code/DataAcquisition/scraping_ons_selenium.py`.
 
+### Roteiro rápido para testar as funcionalidades do TP4 (local, com `requirements-llm.txt`)
+
+1. **Modelo:** abra a página IA local (LLM). Se o modelo não estiver carregado, clique em "Carregar modelo agora" (cerca de 1 minuto na primeira vez).
+2. **Ficha do município:** na aba Ficha do município, escolha um município e clique em "Gerar ficha em linguagem simples". O texto aparece ao lado dos números enviados ao modelo.
+3. **Notícia:** na aba Notícia da ANEEL, escolha "Classificar o impacto para GD" e clique em "Processar com o LLM".
+4. **Erro tratado:** na aba Texto livre, envie "curto demais". A API responde 422 e a tela mostra o motivo e a dica.
+
 Os prints dessas telas estão em [`Docs/Prints/`](Docs/Prints).
 
 ## Deploy
@@ -186,14 +224,16 @@ O app está publicado no Streamlit Community Cloud em https://radar-solar-munici
 - População estimada: IBGE, API SIDRA (tabela 6579).
 - Notícias: site da ANEEL, gov.br/aneel/pt-br/assuntos/noticias.
 - Geração por fonte em tempo real: ONS, ons.org.br/paginas/energia-agora/carga-e-geracao (Selenium).
+- Modelo de linguagem: Qwen/Qwen2.5-0.5B-Instruct, HuggingFace (huggingface.co/Qwen/Qwen2.5-0.5B-Instruct), licença Apache 2.0.
 
 ## Uso de IA
 
-O TP2 e o TP3 têm sinal verde para ferramentas de IA, com citação. Usei o Claude (Anthropic) como apoio no desenvolvimento do código e na revisão dos documentos. Os números citados nos documentos saem da execução dos scripts sobre os dados reais.
+O TP2, o TP3 e o TP4 têm sinal verde para ferramentas de IA, com citação. Usei o Claude (Anthropic) como apoio no desenvolvimento do código e na revisão dos documentos. Os números citados nos documentos saem da execução dos scripts sobre os dados reais, e os tempos e respostas do LLM saem do teste `Code/API/testa_api_llm.py`. O Qwen2.5-0.5B-Instruct não foi usado para desenvolver: ele é parte do produto, roda dentro da API.
 
 ## Documentos
 
 - [Project Charter](Docs/Project/project_charter.md)
+- [Integração do LLM local: escolha do modelo, ambiente e erros](Docs/Project/integracao_llm.md)
 - [Data Summary Report](Docs/DataReport/data_summary_report.md)
 - [Prints da aplicação](Docs/Prints)
-- PDFs entregues: [TP1](rafael_tomiazi_PB_TP1.pdf), [TP2](rafael_tomiazi_PB_TP2.pdf) e [TP3](rafael_tomiazi_PB_TP3.pdf)
+- PDFs entregues: [TP1](rafael_tomiazi_PB_TP1.pdf), [TP2](rafael_tomiazi_PB_TP2.pdf), [TP3](rafael_tomiazi_PB_TP3.pdf) e [TP4](rafael_tomiazi_PB_TP4.pdf)

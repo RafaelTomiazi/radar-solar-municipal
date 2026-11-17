@@ -4,6 +4,8 @@
 #      upload/download de CSV, cache e estado de sessao
 # TP3: virou app multipagina (pasta paginas/), com menu de navegacao, pagina de
 #      geracao do ONS coletada com Selenium e pagina que consome a API FastAPI
+# TP4: pagina "IA local (LLM)": resumo e classificacao de noticias e ficha do
+#      municipio em linguagem simples, com um modelo da HuggingFace rodando local
 #
 # Esse arquivo agora e so a "casca": configura a pagina, monta a barra lateral
 # com os filtros (que valem pra todas as paginas) e chama a pagina escolhida.
@@ -57,6 +59,9 @@ paginas = {
         st.Page("paginas/4_geracao_ons.py", title="Geração agora (ONS)", icon="⚡"),
         st.Page("paginas/5_api.py", title="Consulta via API", icon="🔌"),
         st.Page("paginas/6_seus_dados.py", title="Seus dados", icon="📁"),
+    ],
+    "Inteligência artificial": [
+        st.Page("paginas/9_ia_local.py", title="IA local (LLM)", icon=":material/smart_toy:"),
     ],
     "Projeto": [
         st.Page("paginas/7_sobre.py", title="Sobre o projeto", icon="ℹ️"),
@@ -136,5 +141,6 @@ navegacao.run()
 st.divider()
 st.caption(
     "Dados: ANEEL (licença ODbL), IBGE e ONS. Notícias: gov.br/aneel. "
-    "Ferramenta de IA usada no desenvolvimento: Claude (Anthropic). TP3 da disciplina."
+    "LLM local: Qwen2.5-0.5B-Instruct (HuggingFace, Apache 2.0). "
+    "Ferramenta de IA usada no desenvolvimento: Claude (Anthropic). TP4 da disciplina."
 )
