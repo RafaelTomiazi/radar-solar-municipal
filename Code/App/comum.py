@@ -57,7 +57,9 @@ def carregar_municipios():
 
 @st.cache_data(ttl=3600)
 def consultar_metadados():
-    # a base nao muda de minuto em minuto, 1h de cache ja ta bom
+    # a base nao muda de minuto em minuto, 1h de cache ja ta bom.
+    # obs: no Streamlit Cloud (servidores fora do Brasil) a API da ANEEL nao
+    # responde, entao la sempre cai no cache_metadados.json versionado
     return buscar_metadados()
 
 
