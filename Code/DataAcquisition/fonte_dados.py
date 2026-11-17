@@ -30,10 +30,15 @@ def buscar_metadados():
         salvar_cache(atualizado)
         return atualizado, "API da ANEEL ao vivo"
 
-    # peguei um Exception generico mesmo, nao precisa separar timeout de
-    # connection error aqui, o fallback e o mesmo pros dois casos
+    # o fallback e o mesmo pra qualquer erro, so muda a frase. antes eu
+    # mostrava a excecao inteira na tela (HTTPSConnectionPool... Max retries...)
+    # e ficava ilegivel pro gestor, agora vai so uma frase e o nome do erro
+    except requests.Timeout:
+        return ler_cache("a API da ANEEL não respondeu a tempo")
+    except requests.ConnectionError:
+        return ler_cache("não consegui conectar na API da ANEEL")
     except Exception as erro:
-        return ler_cache("a API retornou um erro: %s" % erro)
+        return ler_cache("a API da ANEEL respondeu com erro (%s)" % erro.__class__.__name__)
 
 
 def salvar_cache(data_referencia):
